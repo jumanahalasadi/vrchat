@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class updateEmot : MonoBehaviour {
     public Material mHappy;
@@ -9,15 +11,25 @@ public class updateEmot : MonoBehaviour {
     public Material mWink;
     public Material mLove;
     public Material mShy;
+	public int activeEmoji;
+	private Camera playerCamera;
 
     private PhotonView photonView;
     // Use this for initialization
     void Start () {
+		activeEmoji = 1;
         photonView = GetComponent<PhotonView>();
         PhotonNetwork.sendRate = 60;
         PhotonNetwork.sendRateOnSerialize = 1;
+		playerCamera = gameObject.GetComponentInChildren<Camera>();
+
     }
 
+	public void setActiveEmoji (int emoji) {
+		activeEmoji = emoji;
+		Debug.Log ("it worked");
+	}
+		
     // Update is called once per frame
     void Update()
     {
@@ -25,6 +37,8 @@ public class updateEmot : MonoBehaviour {
         {
             return;
         }
+	
+
         if (Input.GetKey("1"))
         {
            GetComponentInChildren<Renderer>().material = mHappy;

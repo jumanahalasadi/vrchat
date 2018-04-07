@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 public class Teleport : MonoBehaviour {
 	float mfieldOfView;
@@ -10,9 +11,16 @@ public class Teleport : MonoBehaviour {
     private Camera sceneCamera;
     private Camera playerCamera;
     private networkManager networkmgn; 
+	private Button EmojiBtn;
+	private Button ExitBtn;
+	private GameObject title;
+
 
 	// Use this for initialization
 	void Start () {
+		title = GameObject.Find ("ActiveChats");
+		EmojiBtn = GameObject.Find ("EmojiBtn").GetComponent<Button>();
+		ExitBtn = GameObject.Find ("ExitBtn").GetComponent<Button>();
 		mfieldOfView = 60.0f;
         sceneCamera = Camera.main;
         playerCamera = gameObject.GetComponentInChildren<Camera>();
@@ -22,7 +30,7 @@ public class Teleport : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		RaycastHit hit;
-		Ray ray = sceneCamera.ScreenPointToRay(Input.mousePosition);
+		Ray ray =playerCamera.ScreenPointToRay(Input.mousePosition);
         sceneCamera.fieldOfView = mfieldOfView;
 
 		if (Input.GetMouseButtonDown (0)) {
@@ -31,8 +39,14 @@ public class Teleport : MonoBehaviour {
 				Transform objectHit = hit.transform;
 
 				if (objectHit.gameObject.tag == "chat") {
-                    networkmgn.OnClick(new Vector3(objectHit.position.x, 1.75f, objectHit.position.z));
-                    gameObject.transform.position = new Vector3 (objectHit.position.x, 1.75f, objectHit.position.z);
+
+					title .SetActive (false);
+
+					EmojiBtn.interactable = true;
+					ExitBtn.interactable = true;
+
+                    networkmgn.OnClick(new Vector3(objectHit.position.x, -20f, objectHit.position.z));
+                    gameObject.transform.position = new Vector3 (objectHit.position.x, -20f, objectHit.position.z);
                     ToggleCameraON();
                 }
 			}
@@ -41,8 +55,13 @@ public class Teleport : MonoBehaviour {
 
 		if (Input.GetKey(KeyCode.Escape)){
 
-            ToggleCameraOFF();
-            sceneCamera.transform.position = new Vector3 (0, 17f, 0);
+           // ToggleCameraOFF();
+			EmojiBtn.interactable = false;
+			ExitBtn.interactable = false;
+			title .SetActive (true);
+
+          	gameObject.transform.position = new Vector3 (0, 0, 0);
+			gameObject.transform.eulerAngles = new Vector3 (0, 0, 0);
 
 		}
 	}
