@@ -42,29 +42,34 @@ public class updateEmot : MonoBehaviour {
         if (Input.GetKey("1"))
         {
            GetComponentInChildren<Renderer>().material = mHappy;
-            Debug.Log("_1");
+            //Debug.Log("_1");
             photonView.RPC("SetEmot", PhotonTargets.All, "mHappy");
         }
         if (Input.GetKey("2"))
         {
-            GetComponentInChildren<Renderer>().material = mFunny;
-            photonView.RPC("SetEmot", PhotonTargets.All, "mFunny");
+            GetComponentInChildren<Renderer>().material = mShy;
+            photonView.RPC("SetEmot", PhotonTargets.All, "mShy");
         }
-        if (Input.GetKey("3"))
+        if (Input.GetKey("6"))
         {
             GetComponentInChildren<Renderer>().material = mTongue;
             photonView.RPC("SetEmot", PhotonTargets.All, "mTongue");
         }
-        if (Input.GetKey("4"))
+        if (Input.GetKey("3"))
         {
             GetComponentInChildren<Renderer>().material = mWink;
             photonView.RPC("SetEmot", PhotonTargets.All, "mWink");
         }
-        if (Input.GetKey("5"))
+        if (Input.GetKey("4"))
         {
             GetComponentInChildren<Renderer>().material = mLove;
             photonView.RPC("SetEmot", PhotonTargets.All, "mLove");
         }
+		if (Input.GetKey("5"))
+		{
+			GetComponentInChildren<Renderer>().material = mFunny;
+			photonView.RPC("SetEmot", PhotonTargets.All, "mFunny");
+		}
     }
     [PunRPC]
     void SetEmot(string face)
