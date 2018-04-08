@@ -47,8 +47,24 @@ public class networkManager : Photon.MonoBehaviour
 
     public void OnJoinedRoom()
     {
+		
         Debug.Log("Joined new room");
         GameObject player = PhotonNetwork.Instantiate(prefab.name, spawn,Quaternion.identity,0);
+		player.transform.eulerAngles = new Vector3 (0f, -62.587f, 0f);
+
+		Camera playerCam = player.GetComponentInChildren<Camera> ();
+		int count = Camera.allCameras.Length;
+
+		//if more than 1 camera 
+		if (count > 1) {
+			for (int i = 0; i < count-1; i++) {
+				if (Camera.allCameras [i] == playerCam) {
+				} else {
+					Camera.allCameras [i].enabled = false;
+				}
+			}
+		}
+
     }
 
     public void JointRoom(string roomName) {

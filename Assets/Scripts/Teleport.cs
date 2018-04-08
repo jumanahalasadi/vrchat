@@ -29,9 +29,12 @@ public class Teleport : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
 		RaycastHit hit;
 		Ray ray =playerCamera.ScreenPointToRay(Input.mousePosition);
-        sceneCamera.fieldOfView = mfieldOfView;
+		//sceneCamera = Camera.main;
+
+        //sceneCamera.fieldOfView = mfieldOfView;
 
 		if (Input.GetMouseButtonDown (0)) {
 
@@ -45,8 +48,8 @@ public class Teleport : MonoBehaviour {
 					EmojiBtn.interactable = true;
 					ExitBtn.interactable = true;
 
-                    networkmgn.OnClick(new Vector3(objectHit.position.x, -20f, objectHit.position.z));
-                    gameObject.transform.position = new Vector3 (objectHit.position.x, -20f, objectHit.position.z);
+                    networkmgn.OnClick(new Vector3(objectHit.position.x, -18f, objectHit.position.z));
+                    gameObject.transform.position = new Vector3 (objectHit.position.x, -18f, objectHit.position.z);
                     ToggleCameraON();
                 }
 			}
@@ -61,20 +64,20 @@ public class Teleport : MonoBehaviour {
 			title .SetActive (true);
 
           	gameObject.transform.position = new Vector3 (0, 0, 0);
-			gameObject.transform.eulerAngles = new Vector3 (0, 0, 0);
+			gameObject.transform.eulerAngles = new Vector3 (0,  -62.587f, 0);
 
 		}
 	}
     //onclick change camera between scene and FPV
     public void ToggleCameraON() {
-         sceneCamera.enabled = false;
-         playerCamera.enabled = true;
+//         sceneCamera.enabled = false;
+//         playerCamera.enabled = true;
 
     }
     public void ToggleCameraOFF()
     {
-        sceneCamera.enabled = true;
-        playerCamera.enabled = false;
+//        sceneCamera.enabled = true;
+//        playerCamera.enabled = false;
 
     }
 

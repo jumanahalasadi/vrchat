@@ -146,6 +146,7 @@
      <Compile Include="Assets\PUNVoice\TestVoice\ViewDrag.cs" />
      <Compile Include="Assets\Scripts\ChangeEmoji.cs" />
      <Compile Include="Assets\Scripts\EmojiInterface.cs" />
+     <Compile Include="Assets\Scripts\LineRendererTest.cs" />
      <Compile Include="Assets\Scripts\networkManager.cs" />
      <Compile Include="Assets\Scripts\PlayerCtrl.cs" />
      <Compile Include="Assets\Scripts\RotateModel.cs" />
