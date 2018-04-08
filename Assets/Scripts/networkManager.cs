@@ -69,7 +69,7 @@ public class networkManager : Photon.MonoBehaviour
 		
         Debug.Log("Joined new room");
         GameObject player = PhotonNetwork.Instantiate(prefab.name, spawn,Quaternion.identity,0);
-		player.transform.eulerAngles = new Vector3 (0f, -62.587f, 0f);
+		player.transform.eulerAngles = new Vector3 (0f, 0f, 0f);
 
 		playerCam = player.GetComponentInChildren<Camera> ();
 
