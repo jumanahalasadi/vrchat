@@ -8,6 +8,7 @@ public class networkManager : Photon.MonoBehaviour
     public GameObject prefab; 
     public const string VERSION = "1.0";
     private Vector3 spawn; 
+	Camera playerCam;
 
 	// Use this for initialization
 	void Start () {
@@ -45,6 +46,24 @@ public class networkManager : Photon.MonoBehaviour
         PhotonNetwork.CreateRoom(null, new RoomOptions() { MaxPlayers = 4 }, null);
     }
 
+	private void Update() {
+		if (playerCam) {
+			int count = Camera.allCameras.Length;
+
+			//if more than 1 camera 
+			if (count > 1) {
+				for (int i = 0; i < count; i++) {
+					if (Camera.allCameras [i] == playerCam) {
+					} else {
+						Camera.allCameras [i].enabled = false;
+					}
+				}
+			}
+
+		}
+
+	}
+
     public void OnJoinedRoom()
     {
 		
@@ -52,18 +71,7 @@ public class networkManager : Photon.MonoBehaviour
         GameObject player = PhotonNetwork.Instantiate(prefab.name, spawn,Quaternion.identity,0);
 		player.transform.eulerAngles = new Vector3 (0f, -62.587f, 0f);
 
-		Camera playerCam = player.GetComponentInChildren<Camera> ();
-		int count = Camera.allCameras.Length;
-
-		//if more than 1 camera 
-		if (count > 1) {
-			for (int i = 0; i < count-1; i++) {
-				if (Camera.allCameras [i] == playerCam) {
-				} else {
-					Camera.allCameras [i].enabled = false;
-				}
-			}
-		}
+		playerCam = player.GetComponentInChildren<Camera> ();
 
     }
 
