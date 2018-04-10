@@ -382,6 +382,12 @@ MonoBehaviour:
   mLove: {fileID: 2100000, guid: 97401ad9dd591ba4bb29bad9aaae16bb, type: 2}
   mShy: {fileID: 2100000, guid: b19b8aa5b956c5941882e6298278b42e, type: 2}
   activeEmoji: 0
+  particleShy: {fileID: 0}
+  particleLove: {fileID: 0}
+  particleLaugh: {fileID: 0}
+  particleTongue: {fileID: 0}
+  particleWink: {fileID: 0}
+  particleHappy: {fileID: 0}
 --- !u!114 &114141630570719750
 MonoBehaviour:
   m_ObjectHideFlags: 1

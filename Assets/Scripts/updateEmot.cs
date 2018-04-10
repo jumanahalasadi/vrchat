@@ -13,6 +13,7 @@ public class updateEmot : MonoBehaviour {
     public Material mShy;
 	public int activeEmoji;
 	private Camera playerCamera;
+	public ParticleSystem particleShy, particleLove, particleLaugh, particleTongue, particleWink, particleHappy;
 
     private PhotonView photonView;
     // Use this for initialization
@@ -22,6 +23,12 @@ public class updateEmot : MonoBehaviour {
         PhotonNetwork.sendRate = 60;
         PhotonNetwork.sendRateOnSerialize = 1;
 		playerCamera = gameObject.GetComponentInChildren<Camera>();
+		particleShy = GameObject.Find ("ParticleShy").GetComponent<ParticleSystem>();
+		particleLove = GameObject.Find ("ParticleLove").GetComponent<ParticleSystem>();
+		particleLaugh = GameObject.Find ("ParticleLaugh").GetComponent<ParticleSystem>();
+		particleTongue = GameObject.Find ("ParticleTongue").GetComponent<ParticleSystem>();
+		particleWink = GameObject.Find ("ParticleWink").GetComponent<ParticleSystem>();
+		particleHappy = GameObject.Find ("ParticleWink").GetComponent<ParticleSystem>();
 
     }
 
@@ -33,42 +40,54 @@ public class updateEmot : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+		
         if (!photonView.isMine)
         {
             return;
         }
 	
 
-        if (Input.GetKey("1"))
-        {
-           GetComponentInChildren<Renderer>().material = mHappy;
-            //Debug.Log("_1");
-            photonView.RPC("SetEmot", PhotonTargets.All, "mHappy");
-        }
-        if (Input.GetKey("2"))
-        {
-            GetComponentInChildren<Renderer>().material = mShy;
-            photonView.RPC("SetEmot", PhotonTargets.All, "mShy");
-        }
-        if (Input.GetKey("6"))
-        {
-            GetComponentInChildren<Renderer>().material = mTongue;
-            photonView.RPC("SetEmot", PhotonTargets.All, "mTongue");
-        }
-        if (Input.GetKey("3"))
-        {
-            GetComponentInChildren<Renderer>().material = mWink;
-            photonView.RPC("SetEmot", PhotonTargets.All, "mWink");
-        }
-        if (Input.GetKey("4"))
-        {
-            GetComponentInChildren<Renderer>().material = mLove;
-            photonView.RPC("SetEmot", PhotonTargets.All, "mLove");
-        }
-		if (Input.GetKey("5"))
-		{
-			GetComponentInChildren<Renderer>().material = mFunny;
-			photonView.RPC("SetEmot", PhotonTargets.All, "mFunny");
+		if (Input.GetKeyDown (KeyCode.Alpha1)) {
+			
+			GetComponentInChildren<Renderer> ().material = mHappy;
+			particleHappy.Play (); 
+			particleHappy.Emit (10);
+			Debug.Log ("_1");
+			photonView.RPC ("SetEmot", PhotonTargets.All, "mHappy");
+		} else if (Input.GetKeyDown (KeyCode.Alpha2))  {
+			particleShy.Play ();
+			particleShy.Emit (10);
+			GetComponentInChildren<Renderer> ().material = mShy;
+			photonView.RPC ("SetEmot", PhotonTargets.All, "mShy");
+		} else if (Input.GetKeyDown (KeyCode.Alpha6))  {
+			particleTongue.Play ();
+			particleTongue.Emit (10);
+			GetComponentInChildren<Renderer> ().material = mTongue;
+			photonView.RPC ("SetEmot", PhotonTargets.All, "mTongue");
+		} else if (Input.GetKeyDown (KeyCode.Alpha3)) {
+			particleWink.Play ();
+			particleWink.Emit (10);
+			GetComponentInChildren<Renderer> ().material = mWink;
+			photonView.RPC ("SetEmot", PhotonTargets.All, "mWink");
+		} else if (Input.GetKeyDown (KeyCode.Alpha4))  {
+			particleLove.Play ();
+			particleLove.Emit (10);
+			GetComponentInChildren<Renderer> ().material = mLove;
+			photonView.RPC ("SetEmot", PhotonTargets.All, "mLove");
+		} else if (Input.GetKeyDown (KeyCode.Alpha5)) {
+			particleLaugh.Play ();
+			particleLaugh.Emit (10);
+			GetComponentInChildren<Renderer> ().material = mFunny;
+			photonView.RPC ("SetEmot", PhotonTargets.All, "mFunny");
+		} else {
+			particleHappy.Stop ();
+			particleShy.Stop ();
+			particleWink.Stop ();
+			particleLove.Stop ();
+			particleTongue.Stop ();
+			particleLaugh.Stop ();
+
+
 		}
     }
     [PunRPC]
