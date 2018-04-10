@@ -64,7 +64,7 @@ public class Teleport : MonoBehaviour {
 			title .SetActive (true);
 
           	gameObject.transform.position = new Vector3 (0, 0, 0);
-			gameObject.transform.eulerAngles = new Vector3 (0,  -62.587f, 0);
+			gameObject.transform.eulerAngles = new Vector3 (0,  0f, 0);
 
 		}
 	}
