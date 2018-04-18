@@ -38,5 +38,5 @@ sysinfo.txt
 # Temp and metadata
 Temp/
 */Library/metadata/
+*/Library/PlayerDataCache/
 */Library/EditorInstance.json
-src/.vs/src/v15/sqlite3/storage.ide
